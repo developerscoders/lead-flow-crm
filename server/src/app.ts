@@ -20,10 +20,10 @@ export function createApp() {
       contentSecurityPolicy: false, // frontend is a separate SPA build; CSP configured at the host level
     })
   );
-
+  console.log(process.env.CLIENT_ORIGIN);
   app.use(
     cors({
-      origin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
+      origin: process.env.CLIENT_ORIGIN,
       credentials: true,
     })
   );

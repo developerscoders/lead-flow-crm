@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useMe } from "@/lib/auth";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { CheckCircle2, ArrowRight, GaugeCircle } from "lucide-react";
@@ -28,6 +29,7 @@ export const Route = createFileRoute("/")({
 });
 
 function LandingPage() {
+  const me = useMe();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -63,6 +65,28 @@ function LandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <header className="w-full border-b border-border/40 px-6 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-2 lg:hidden">
+          <GaugeCircle className="h-6 w-6 text-accent" />
+          <span className="font-serif text-xl tracking-tight">LeadFlow</span>
+        </div>
+        <div className="hidden lg:block" />
+        {me.data ? (
+          <Link
+            to="/dashboard"
+            className="text-sm font-medium hover:text-accent transition-colors ml-auto flex items-center gap-1.5"
+          >
+            Go to Dashboard <ArrowRight className="h-4 w-4" />
+          </Link>
+        ) : (
+          <Link
+            to="/login"
+            className="text-sm font-medium hover:text-accent transition-colors ml-auto flex items-center gap-1.5"
+          >
+            Sign In <ArrowRight className="h-4 w-4" />
+          </Link>
+        )}
+      </header>
       <div className="flex-1 grid lg:grid-cols-2">
         {/* Left rail — brand */}
         <div className="relative hidden lg:flex flex-col justify-between bg-sidebar text-sidebar-foreground p-12 overflow-hidden">

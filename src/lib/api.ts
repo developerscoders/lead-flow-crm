@@ -4,7 +4,7 @@
 // - Normalizes { data, pagination? } and { error: { code, message } }
 
 const BASE = (import.meta.env.VITE_API_URL ?? "").replace(/\/$/, "");
-
+console.log(BASE);
 export class ApiError extends Error {
   code: string;
   status: number;
@@ -117,11 +117,11 @@ export type LeadNote = {
 export type LeadActivity = {
   id: string;
   type:
-    | "LEAD_CREATED"
-    | "ASSIGNED"
-    | "STATUS_CHANGED"
-    | "NOTE_ADDED"
-    | "FIELDS_UPDATED";
+  | "LEAD_CREATED"
+  | "ASSIGNED"
+  | "STATUS_CHANGED"
+  | "NOTE_ADDED"
+  | "FIELDS_UPDATED";
   metadata?: Record<string, any>;
   createdAt: string;
   actor?: { id: string; name: string } | null;
